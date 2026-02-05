@@ -1,0 +1,27 @@
+//pegar estrutura de código padrão muito usada no java e aplique no projeto
+//manter estrutura de pastas e projeto bem definida
+//pesquisar "tipica estrutura de pastas do java" e copiar a estrutura respeitando ela 
+//controller só recebe requisições 
+//regras de negócio são em services
+//clean code: 
+//metodos curtos - um método tem que ter no máximo 10 linhas e precisam ser auto-descritivos sem comentar código
+//o método precisa ser escrito de forma que o nome dele e o nome das variávis já estarem dizendo o que o método está fazendo  
+//quando implementar uma regra de negócio, pensar que se tiver mais que uma solução para o problema, 
+//a melhor é aquela em que o código continua legível e mantendo a estrutura de pastas e que caso seja preciso alterar a regra de negócio,
+//mudar o minimo de arquivos e partes de código possíveis 
+//é muito melhor ter um código em que para alterar algo seja necessário mexer em um unico lugar 
+//se tiver que mexer em vários é pq o código não está bom
+
+
+
+
+config o jdk 17
+
+$env:JAVA_HOME="C:\Program Files\Java\jdk-17"
+$env:Path="$env:JAVA_HOME\bin;$env:Path"
+java -version
+javac -version
+
+inicializar 
+
+javac HtmlAnalyzer.java
