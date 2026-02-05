@@ -56,21 +56,20 @@ final class TagParser {
     private static String normalize(String tagName) {
         return tagName.toLowerCase(Locale.ROOT);
     }
-}
 
-enum TagKind { OPEN, CLOSE }
+    enum TagKind { OPEN, CLOSE }
 
-final class Tag {
+    static final class Tag {
+        final TagKind kind;
+        final String name;
 
-    final TagKind kind;
-    final String name;
-
-    Tag(TagKind kind, String name) {
-        this.kind = kind;
-        this.name = name;
+        Tag(TagKind kind, String name) {
+            this.kind = kind;
+            this.name = name;
+        }
     }
-}
 
-final class MalformedHtmlException extends Exception {
-    private static final long serialVersionUID = 1L;
+    static final class MalformedHtmlException extends Exception {
+        private static final long serialVersionUID = 1L;
+    }
 }

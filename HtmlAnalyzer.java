@@ -19,7 +19,7 @@ public final class HtmlAnalyzer {
 
         try (BufferedReader reader = HttpHtmlSource.openReader(url)) {
             return DeepestTextScanner.findDeepestText(reader);
-        } catch (MalformedHtmlException e) {
+        } catch (TagParser.MalformedHtmlException e) {
             return OUT_MALFORMED;
         } catch (IOException | RuntimeException e) {
             return OUT_URL_ERROR;

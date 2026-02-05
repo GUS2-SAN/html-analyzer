@@ -8,7 +8,7 @@ final class DeepestTextScanner {
     private DeepestTextScanner() {
     }
 
-    static String findDeepestText(BufferedReader reader) throws IOException, MalformedHtmlException {
+    static String findDeepestText(BufferedReader reader) throws IOException, TagParser.MalformedHtmlException {
         ScanState state = new ScanState();
         for (String line; (line = nextMeaningfulLine(reader)) != null; ) state.consume(line);
         state.ensureAllTagsClosed();
@@ -29,13 +29,13 @@ final class DeepestTextScanner {
         private int bestDepth = -1;
         private String bestText = "";
 
-        void consume(String line) throws MalformedHtmlException {
+        void consume(String line) throws TagParser.MalformedHtmlException {
             if (isTagLine(line)) consumeTagLine(line);
             else acceptText(line);
         }
 
-        void ensureAllTagsClosed() throws MalformedHtmlException {
-            if (!openTags.isEmpty()) throw new MalformedHtmlException();
+        void ensureAllTagsClosed() throws TagParser.MalformedHtmlException {
+            if (!openTags.isEmpty()) throw new TagParser.MalformedHtmlException();
         }
 
         private void acceptText(String text) {
@@ -45,15 +45,15 @@ final class DeepestTextScanner {
             bestText = text;
         }
 
-        private void consumeTagLine(String line) throws MalformedHtmlException {
-            Tag tag = TagParser.parse(line);
-            if (tag.kind == TagKind.OPEN) openTags.push(tag.name);
+        private void consumeTagLine(String line) throws TagParser.MalformedHtmlException {
+            TagParser.Tag tag = TagParser.parse(line);
+            if (tag.kind == TagParser.TagKind.OPEN) openTags.push(tag.name);
             else closeExpected(tag.name);
         }
 
-        private void closeExpected(String closingTag) throws MalformedHtmlException {
-            if (openTags.isEmpty()) throw new MalformedHtmlException();
-            if (!openTags.peek().equals(closingTag)) throw new MalformedHtmlException();
+        private void closeExpected(String closingTag) throws TagParser.MalformedHtmlException {
+            if (openTags.isEmpty()) throw new TagParser.MalformedHtmlException();
+            if (!openTags.peek().equals(closingTag)) throw new TagParser.MalformedHtmlException();
             openTags.pop();
         }
     }
