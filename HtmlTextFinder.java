@@ -46,7 +46,7 @@ public class HtmlTextFinder {
     }
 
     private void handleLine(String line) {
-        Optional<Tag> maybeTag = Tag.tryParse(line);
+        Optional<HtmlTag> maybeTag = HtmlTag.tryParse(line);
 
         if (maybeTag.isPresent()) {
             applyTag(maybeTag.get());
@@ -64,7 +64,7 @@ public class HtmlTextFinder {
         return line != null && !line.isEmpty() && line.charAt(0) == '<';
     }
 
-    private void applyTag(Tag tag) {
+    private void applyTag(HtmlTag tag) {
         if (tag.isOpen()) {
             openTags.push(tag.name());
             return;
